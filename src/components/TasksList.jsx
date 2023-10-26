@@ -22,7 +22,7 @@ const ListTasks = ({ tasks, setTasks }) => {
 
 
     return (
-        <div className="w-full overflow-x-scroll flex gap-10 p-10 pt-0 min-h-[calc(100vh-150px)]">
+        <div className="w-full overflow-x-scroll flex pl-3 md:pl-10 gap-3 md:gap-10 p-10 pt-0 min-h-[calc(100vh-150px)]">
             {
                 statuses.map((status, index) => (
                     <Section
@@ -96,7 +96,7 @@ const Section = ({ status, tasks, setTasks, todos, inProgress, closed }) => {
 
 const Header = ({ text, bg, count }) => {
     return (
-        <div className={`${bg} p-2 px-4 flex justify-between rounded-md w-[300px] text-white font-medium`}>
+        <div className={`${bg} p-2 px-4 flex justify-between rounded-md w-[240px] md:w-[300px] text-white font-medium`}>
             {text}
             <div className="bg-white text-slate-500 rounded-[50%] w-[25px] h-[25px] flex justify-center">
                 {count}
