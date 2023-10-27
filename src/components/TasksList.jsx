@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import toast from "react-hot-toast";
 
-const ListTasks = ({ tasks, setTasks }) => {
+const ListTasks = ({ tasks, setTasks, themeTwo }) => {
     const [todos, setTodos] = useState([]);
     const [inProgress, setInProgress] = useState([]);
     const [closed, setClosed] = useState([]);
+    const [theme, setTheme] = useState([]);
 
     useEffect(() => {
         if (localStorage.getItem("tasks") !== null) {
@@ -20,12 +21,12 @@ const ListTasks = ({ tasks, setTasks }) => {
 
     const statuses = ['todo', 'inprogress', 'closed'];
 
-
     return (
-        <div className="w-full overflow-x-scroll flex pl-3 md:pl-10 gap-3 md:gap-10 p-10 pt-0 min-h-[calc(100vh-150px)]">
+        <div className={`w-full overflow-x-scroll ${themeTwo ? 'bg-slate-100' : 'bg-slate-900'} flex pl-3 md:pl-10 gap-3 md:gap-10 p-10 pt-0 min-h-screen`}>
             {
                 statuses.map((status, index) => (
                     <Section
+                        themeTwo={themeTwo}
                         key={index}
                         status={status}
                         tasks={tasks}
@@ -42,7 +43,7 @@ const ListTasks = ({ tasks, setTasks }) => {
 
 export default ListTasks;
 
-const Section = ({ status, tasks, setTasks, todos, inProgress, closed }) => {
+const Section = ({ status, tasks, setTasks, todos, inProgress, closed, themeTwo }) => {
     const [{ isOver }, drop] = useDrop(() => ({
         accept: "task",
         drop: (item) => addItemtoSection(item.id),
@@ -68,26 +69,29 @@ const Section = ({ status, tasks, setTasks, todos, inProgress, closed }) => {
     }
 
     let text = "Сделать";
-    let bg = 'bg-slate-500';
+    let bg = `${themeTwo ? 'bg-slate-400' : 'bg-slate-600'}`;
     let tasksToMap = todos;
 
     if (status === 'inprogress') {
         text = 'В процессе...';
-        bg = 'bg-purple-500';
+        bg = `${themeTwo ? 'bg-purple-500' : 'bg-purple-500'}`;
         tasksToMap = inProgress;
     }
     if (status === 'closed') {
         text = 'Готово!';
-        bg = 'bg-green-500';
+        bg = `${themeTwo ? 'bg-green-500' : 'bg-green-400'}`;
         tasksToMap = closed;
     }
     return (
-        <div ref={drop} className={`${isOver ? 'bg-slate-200' : ""} flex flex-col p-2 rounded-md`}>
+        <div ref={drop} className={`${themeTwo
+            ? `${isOver ? 'bg-slate-200' : 'bg-slate-50'}`
+            : `${isOver ? 'bg-slate-700' : 'bg-slate-800'}`} flex flex-col p-2 rounded-md`}
+        >
             <Header bg={bg} text={text} count={tasksToMap.length} />
             {
                 tasksToMap.length > 0
                 && tasksToMap.map((task) => (
-                    <Task key={task.id} task={task} tasks={tasks} setTasks={setTasks} />
+                    <Task themeTwo={themeTwo} key={task.id} task={task} tasks={tasks} setTasks={setTasks} />
                 ))
             }
         </div>
@@ -96,7 +100,7 @@ const Section = ({ status, tasks, setTasks, todos, inProgress, closed }) => {
 
 const Header = ({ text, bg, count }) => {
     return (
-        <div className={`${bg} p-2 px-4 flex justify-between rounded-md w-[240px] md:w-[300px] text-white font-medium`}>
+        <div className={`text-white ${bg} p-2 px-4 flex justify-between rounded-md w-[240px] md:w-[300px]  font-medium`}>
             {text}
             <div className="bg-white text-slate-500 rounded-[50%] w-[25px] h-[25px] flex justify-center">
                 {count}
@@ -105,7 +109,7 @@ const Header = ({ text, bg, count }) => {
     )
 }
 
-const Task = ({ task, tasks, setTasks }) => {
+const Task = ({ task, tasks, setTasks, themeTwo }) => {
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "task",
         item: { id: task.id },
@@ -120,14 +124,15 @@ const Task = ({ task, tasks, setTasks }) => {
         setTasks(fTasks)
         toast("Задача удалена", { icon: "👎😢" })
     }
+    // ${isDragging ? "opacity-50" : "opacity-100"}
     return (
-        <div ref={drag} className={`relative flex justify-between p-4 mt-3 shadow-md rounded-md cursor-grab ${isDragging ? "opacity-30" : "opacity-100"}`}>
-                <p>{task.name}</p>
-                <button className="" onClick={() => handleRemove(task.id)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </button>
+        <div ref={drag} className={`relative flex justify-between p-4 mt-3 shadow-md ${themeTwo ? 'text-black' : 'text-white bg-slate-900'} rounded-md cursor-grab `}>
+            <p>{task.name}</p>
+            <button className="" onClick={() => handleRemove(task.id)}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </button>
         </div>
     )
 }
