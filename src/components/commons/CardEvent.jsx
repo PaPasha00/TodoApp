@@ -35,7 +35,7 @@ const CardEvent = ({ themeTwo, event, handleRemove }) => {
     }
 
     return (
-        <div className={`relative w-full flex justify-between p-4 mt-3 shadow-md ${themeTwo ? 'text-black' : 'text-white bg-slate-900'} rounded-md`}>
+        <div className={`relative w-full flex justify-between p-4 mt-1 shadow-md ${themeTwo ? 'text-black' : 'text-white bg-slate-900'} rounded-md`}>
             <span className="flex flex-col gap-1">
                 <p>{event.name}</p>
                 <span className="flex gap-3 text-slate-400 font-medium">

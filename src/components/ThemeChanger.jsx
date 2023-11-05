@@ -1,74 +1,71 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import LinkButton from "./commons/LinkButton";
+import { motion, useAnimation } from "framer-motion";
 
-const ThemeChanger = () => {
-    const [theme, setTheme] = useState({
-        name: '',
-        bg: 'bg-[#000000]',
-        bgInput: 'bg-[#000000]',
-        button: 'bg-[#000000]',
-        todo: 'bg-[#000000]',
-        inprogress: 'bg-[#000000]',
-        closed: 'bg-[#000000]'
+const svgVariants = {
+    white: {
+        x: 0,
+    },
+    black: {
+        x: 15,
     }
-    )
-    return (
-        <div className="flex justify-center pt-[100px] flex-col items-center">
-            <Link to={`/`} className="absolute top-5 flex gap-2 items-center font-bold hover:text-slate-500 duration-300">К задачам
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
-                </svg>
+}
 
-            </Link>
-            <div className="flex items-center justify-center p-5 gap-5">
-                <span className="text-slate-500 font-bold flex items-center">Выберите название темы</span>
-                <input onChange={(e) => { setTheme({ ...theme, name: `${e.target.value}` }); }}
-                    className="border-2 border-slate-400 rounded-md p-2" type="text"
-                />
-            </div>
-            <div className="flex items-center justify-center p-5 gap-5">
-                <span className="text-slate-500 font-bold flex items-center">Выберите цвет фона</span>
-                <input onChange={(e) => { setTheme({ ...theme, bg: `bg-[${e.target.value}]` }); }}
-                    className="border-2 border-slate-400 rounded-md" type="color"
-                />
-            </div>
-            <div className="flex items-center justify-center p-5 gap-5">
-                <span className="text-slate-500 font-bold flex items-center">Выберите поля ввода</span>
-                <input onChange={(e) => { setTheme({ ...theme, bgInput: `bg-[${e.target.value}]` }); }}
-                    className="border-2 border-slate-400 rounded-md" type="color"
-                />
-            </div>
-            <div className="flex items-center justify-center p-5 gap-5">
-                <span className="text-slate-500 font-bold flex items-center">Выберите цвет кнопки добавления задачи</span>
-                <input onChange={(e) => { setTheme({ ...theme, button: `bg-[${e.target.value}]` }); }}
-                    className="border-2 border-slate-400 rounded-md" type="color"
-                />
-            </div>
-            <div className="flex items-center justify-center p-5 gap-5">
-                <span className="text-slate-500 font-bold flex items-center">Выберите цвет "Сделать"</span>
-                <input onChange={(e) => { setTheme({ ...theme, todo: `bg-[${e.target.value}]` }); }}
-                    className="border-2 border-slate-400 rounded-md" type="color"
-                />
-            </div>
-            <div className="flex items-center justify-center p-5 gap-5">
-                <span className="text-slate-500 font-bold flex items-center">Выберите цвет "В процессе"</span>
-                <input onChange={(e) => { setTheme({ ...theme, inprogress: `bg-[${e.target.value}]` }); }}
-                    className="border-2 border-slate-400 rounded-md" type="color"
-                />
-            </div>
-            <div className="flex items-center justify-center p-5 gap-5">
-                <span className="text-slate-500 font-bold flex items-center">Выберите цвет "Сделано"</span>
-                <input onChange={(e) => { setTheme({ ...theme, closed: `bg-[${e.target.value}]` }); }}
-                    className="border-2 border-slate-400 rounded-md" type="color"
-                />
-            </div>
-            <button className="bg-slate-500 text-white p-2 rounded-md font-bold" onClick={() => {
-                localStorage.setItem(`themBase`, JSON.stringify([...JSON.parse(localStorage.getItem("themBase")), theme]))
-            }}>
-                Добавить тему
+const ThemeChanger = ({themeTwo, setThemeTwo, needButtonsDrug, setNeedButtonsDrug, setThemeMenu, themeMenu}) => {
+    const [task, setTask] = useState({
+        id: "",
+        name: "",
+        status: 'todo'
+    });
+    const themeControl = useAnimation();
+    const themeControlTwo = useAnimation();
+    const [changeButton, setCnangeButton] = useState(true);
+    const [changeButtonTwo, setCnangeButtonTwo] = useState(true);
+
+    const changeThemeFuck = () => {
+        setThemeTwo(!themeTwo)
+        setCnangeButton(!changeButton)
+
+        if (!changeButton) {
+            themeControl.start(svgVariants.white)
+        } else {
+            themeControl.start(svgVariants.black)
+        }
+    }
+
+    const changeThemeFunk2 = () => {
+        setCnangeButtonTwo(!changeButtonTwo)
+        setNeedButtonsDrug(!needButtonsDrug)
+        
+        if (!changeButtonTwo) {
+            themeControlTwo.start(svgVariants.white)
+        } else {
+            themeControlTwo.start(svgVariants.black)
+        }
+    }
+
+    return (
+        <section className={`flex sticky top-0 z-20 flex-col w-full h-screen items-center pt-[100px] gap-4 ${themeTwo ? "bg-slate-100" : "bg-slate-900"}`}>
+            <button onClick={() => setThemeMenu(!themeMenu)} className="absolute flex gap-2 top-3 font-black text-slate-100 p-1 px-2 rounded-md bg-slate-600 hover:bg-slate-500 duration-300">К делам</button>
+            
+            <span onClick={changeThemeFuck} className={`w-[300px] h-[50px] flex justify-between font-medium p-3 rounded-md items-center ${themeTwo ? "bg-slate-200 text-slate-900" : "bg-slate-700 text-slate-300"}`}>
+                <p>Изменить тему</p>
+                <button onClick={changeThemeFuck} className="bg-white border-2 border-slate-700 p-1 rounded-[50px] w-[40px]">
+                <motion.div animate={themeControl} transition={{ duration: 0.7 }} className="w-[12px] h-[12px] bg-slate-700 rounded-[50%]"></motion.div>
             </button>
-        </div>
+            </span>
+            
+            <span onClick={changeThemeFunk2} className={`w-[300px] h-[150px] flex justify-between font-medium p-3 rounded-md items-center ${themeTwo ? "bg-slate-200 text-slate-900" : "bg-slate-700 text-slate-300"}`}>
+                <p className="w-[200px]">{needButtonsDrug ? 'Убрать' : 'Добавить'} дополнительные кнопки для перемещания карточек</p>
+                <button onClick={changeThemeFunk2} className="bg-white border-2 border-slate-700 p-1 rounded-[50px] h-[24px] w-[40px]">
+                <motion.div animate={themeControlTwo} transition={{ duration: 0.7 }} className="w-[12px] h-[12px] bg-slate-700 rounded-[50%]"></motion.div>
+            </button>
+            </span>
+            
+        </section>
+
     )
 }
 

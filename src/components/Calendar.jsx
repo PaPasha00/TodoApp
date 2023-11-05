@@ -106,7 +106,7 @@ const Calendar = () => {
 
                 </form>
 
-                <div className={`max-w-lg w-full flex flex-col p-2 rounded-md ${themeTwo ? "bg-slate-50" : "bg-slate-800"}`}>
+                <div className={`max-w-lg w-full flex flex-col gap-0 p-2 rounded-md ${themeTwo ? "bg-slate-50" : "bg-slate-800"}`}>
                     <Header count={events.length} />
                     {
                         events.map((e, index) => (
