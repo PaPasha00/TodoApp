@@ -3,13 +3,19 @@ import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import { useAnimation } from "framer-motion";
+import { Link } from "react-router-dom";
+import LinkButton from "./commons/LinkButton";
 
 const svgVariants = {
     white: {
         x: 0,
+        scale: [1, 0.6, 0.6, 0.6, 0.6, 0.6, 1],
+        y: [0, 5, 5, 5, 5, 5, 0],
     },
     black: {
-        x: 17,
+        x: 15,
+        scale: [1, 0.6, 0.6, 0.6, 0.6, 0.6, 1],
+        y: [0, -5, -5, -5, -5, -5, 0],
     }
 }
 
@@ -21,11 +27,13 @@ const CreateTask = ({ tasks, setTasks, themeTwo, setThemeTwo }) => {
         status: 'todo'
     });
     const themeControl = useAnimation();
+    const [changeButton, setCnangeButton] = useState(true);
 
     const changeThemeFuck = () => {
         setThemeTwo(!themeTwo)
+        setCnangeButton(!changeButton)
         
-        if (!themeTwo) {
+        if (!changeButton) {
             themeControl.start(svgVariants.white)
         } else {
             themeControl.start(svgVariants.black)
@@ -62,7 +70,8 @@ const CreateTask = ({ tasks, setTasks, themeTwo, setThemeTwo }) => {
     };
 
     return (
-        <div className={`w-full h-[150px] flex gap-3 justify-center ${themeTwo ? 'bg-slate-100' : 'bg-slate-900'} items-center`}>
+        <div className={`w-full h-[150px] flex gap-3 justify-center ${themeTwo  ? 'bg-slate-100' : 'bg-slate-900'} items-center`}>
+            <LinkButton path='/Calendar' text='Календарь' />
             <button onClick={changeThemeFuck} className="bg-white border-2 border-slate-700 p-1 rounded-[50px] w-[40px]">
                 <motion.div animate={themeControl} transition={{ duration: 0.7 }} className="w-[12px] h-[12px] bg-slate-700 rounded-[50%]"></motion.div>
             </button>

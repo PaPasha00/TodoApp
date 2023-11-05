@@ -124,7 +124,6 @@ const Task = ({ task, tasks, setTasks, themeTwo }) => {
         setTasks(fTasks)
         toast("Задача удалена", { icon: "👎😢" })
     }
-    // ${isDragging ? "opacity-50" : "opacity-100"}
     return (
         <div ref={drag} className={`relative flex justify-between p-4 mt-3 shadow-md ${themeTwo ? 'text-black' : 'text-white bg-slate-900'} rounded-md cursor-grab `}>
             <p>{task.name}</p>

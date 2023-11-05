@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: white;
+    border-radius: 5px;
+    padding: 3px;
+}
+input[type="time"]::-webkit-calendar-picker-indicator {
+    background-color: white;
+    border-radius: 5px;
+    padding: 3px;
+}

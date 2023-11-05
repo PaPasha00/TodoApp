@@ -11,6 +11,8 @@ function App() {
     JSON.parse(localStorage.getItem('theme'))
   );
 
+  const status = true;
+
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("tasks")) !== null) {
       setTasks(JSON.parse(localStorage.getItem("tasks")))

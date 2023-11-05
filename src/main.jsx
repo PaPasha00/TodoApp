@@ -7,6 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ThemeChanger from './components/ThemeChanger';
+import Calendar from './components/Calendar.jsx';
 
 const router = createBrowserRouter([
   {
@@ -14,8 +15,8 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "theme",
-    element: <ThemeChanger />,
+    path: "Calendar",
+    element: <Calendar />,
   },
 ]);
 
