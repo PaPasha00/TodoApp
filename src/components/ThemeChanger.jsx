@@ -87,15 +87,15 @@ const ThemeChanger = ({ themeTwo, setThemeTwo, needButtonsDrug, setNeedButtonsDr
                 </button>
             </span>
 
-            <span onClick={changeThemeFunk2} className={`w-[300px] h-[150px] flex justify-between font-medium p-3 rounded-md items-center ${themeTwo ? "bg-slate-200 text-slate-900" : "bg-slate-700 text-slate-300"}`}>
-                <p className="w-[200px]">Нажмите, чтобы {needButtonsDrug ? 'убрать' : 'добавить'} дополнительные кнопки для перемещания карточек</p>
+            <span onClick={changeThemeFunk2} className={`w-[300px] h-[130px] flex justify-between font-medium p-3 rounded-md items-center ${themeTwo ? "bg-slate-200 text-slate-900" : "bg-slate-700 text-slate-300"}`}>
+                <p className="w-[200px]">{needButtonsDrug ? 'Убрать' : 'Добавить'} дополнительные кнопки для перемещания карточек</p>
                 <button onClick={changeThemeFunk2} className="bg-white border-2 border-slate-700 p-1 rounded-[50px] h-[24px] w-[40px]">
                     <motion.div animate={themeControlTwo} transition={{ duration: 0.7 }} className="w-[12px] h-[12px] bg-slate-700 rounded-[50%]"></motion.div>
                 </button>
             </span>
 
-            <span onClick={changeThemeFunk3} className={`w-[300px] h-[100px] flex justify-between font-medium p-3 rounded-md items-center ${themeTwo ? "bg-slate-200 text-slate-900" : "bg-slate-700 text-slate-300"}`}>
-                <p className="w-[200px]">Нажмите, чтобы {needSortedCalendy ? 'добавить' : 'убрать'}  сортировку календаря по датам</p>
+            <span onClick={changeThemeFunk3} className={`w-[300px] h-[80px] flex justify-between font-medium p-3 rounded-md items-center ${themeTwo ? "bg-slate-200 text-slate-900" : "bg-slate-700 text-slate-300"}`}>
+                <p className="w-[200px]">{needSortedCalendy ? 'Добавить' : 'Убрать'}  сортировку календаря по датам</p>
                 <button onClick={changeThemeFunk3} className="bg-white border-2 border-slate-700 p-1 rounded-[50px] h-[24px] w-[40px]">
                     <motion.div animate={themeControlThree} transition={{ duration: 0.7 }} className="w-[12px] h-[12px] bg-slate-700 rounded-[50%]"></motion.div>
                 </button>
