@@ -12,3 +12,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     border-radius: 5px;
     padding: 3px;
 }
+
+body {
+    overflow-x: hidden;
+}

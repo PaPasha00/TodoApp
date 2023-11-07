@@ -60,7 +60,6 @@ const Calendar = () => {
                 return acc
             }, {})
 
-            console.log(sortList);
 
             localStorage.setItem("calendySorted", JSON.stringify(sortList))
             localStorage.setItem("calendy", JSON.stringify(list))
@@ -93,9 +92,6 @@ const Calendar = () => {
             acc[i.date] = acc[i.date] ? acc[i.date] = [...acc[i.date], i] : [i];
             return acc
         }, {})
-
-
-        console.log(sortList);
 
         localStorage.setItem("calendy", JSON.stringify(cList))
         localStorage.setItem("calendySorted", JSON.stringify(sortList))
@@ -142,7 +138,7 @@ const Calendar = () => {
     return (
         <>
             <Toaster />
-            <section className={`w-full ${themeTwo ? 'bg-slate-200' : 'bg-slate-900'} flex px-3 md:pl-10 gap-3 md:gap-10 pt-[50px] min-h-screen flex-col items-center`}>
+            <section className={`w-full ${themeTwo ? 'bg-slate-200' : 'bg-slate-900'} flex pb-5 px-3 md:pl-10 gap-3 md:gap-10 pt-[50px] min-h-screen flex-col items-center`}>
                 <LinkButton text='К делам' path='/' needReverse='true' />
                 <form onSubmit={handleSubmit} className="flex gap-1 flex-col mt-2">
 
