@@ -51,6 +51,9 @@ const Calendar = () => {
             list.sort(function (a, b) {
                 return new Date(a.date) - new Date(b.date);
             });
+            list.sort(function (a, b) {
+                return a.time.localeCompare(b.time);
+            });
 
             let sortList = list.reduce((acc, i) => {
                 acc[i.date] = acc[i.date] ? acc[i.date] = [...acc[i.date], i] : [i];
@@ -82,11 +85,15 @@ const Calendar = () => {
         cList.sort(function (a, b) {
             return new Date(a.date) - new Date(b.date);
         });
+        cList.sort(function (a, b) {
+            return a.time.localeCompare(b.time);
+        });
 
         let sortList = cList.reduce((acc, i) => {
             acc[i.date] = acc[i.date] ? acc[i.date] = [...acc[i.date], i] : [i];
             return acc
         }, {})
+
 
         console.log(sortList);
 
