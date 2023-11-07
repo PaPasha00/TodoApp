@@ -22,7 +22,7 @@ const ListTasks = ({ tasks, setTasks, themeTwo, needButtonsDrug }) => {
     const statuses = ['todo', 'inprogress', 'closed'];
 
     return (
-        <div className={`w-full overflow-x-scroll ${themeTwo ? 'bg-slate-100' : 'bg-slate-900'} flex pl-3 md:pl-10 gap-3 md:gap-10 p-10 pt-0 min-h-screen`}>
+        <div className={`w-full overflow-x-scroll ${themeTwo ? 'bg-slate-200' : 'bg-slate-900'} flex pl-3 md:pl-10 gap-3 md:gap-10 p-10 pt-0 min-h-screen`}>
             {
                 statuses.map((status, index) => (
                     <Section
@@ -85,14 +85,14 @@ const Section = ({ status, tasks, setTasks, todos, inProgress, closed, themeTwo,
     }
     return (
         <div ref={drop} className={`${themeTwo
-            ? `${isOver ? 'bg-slate-200' : 'bg-slate-50'}`
+            ? `${isOver ? 'bg-slate-300' : 'bg-slate-50'}`
             : `${isOver ? 'bg-slate-700' : 'bg-slate-800'}`} flex flex-col p-2 rounded-md`}
         >
             <Header bg={bg} text={text} count={tasksToMap.length} />
             {
                 tasksToMap.length > 0
                 && tasksToMap.map((task) => (
-                    <Task themeTwo={themeTwo} key={task.id} task={task} tasks={tasks} setTasks={setTasks} needButtonsDrug={needButtonsDrug}/>
+                    <Task themeTwo={themeTwo} key={task.id} task={task} tasks={tasks} setTasks={setTasks} needButtonsDrug={needButtonsDrug} />
                 ))
             }
         </div>
@@ -171,18 +171,46 @@ const Task = ({ task, tasks, setTasks, themeTwo, needButtonsDrug }) => {
             {
                 needButtonsDrug
                     ? <span className="w-full flex justify-end mt-2">
-                        <span className="flex gap-2">
-                            <button onClick={() => addItemtoSection(task.id, task.status, 'back')}>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-                                </svg>
-                            </button>
-                            <button onClick={() => addItemtoSection(task.id, task.status, 'forward')}>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l6-6m0 0l-6-6m6 6H9a6 6 0 000 12h3" />
-                                </svg>
-                            </button>
-                        </span>
+                        {
+                            task.status === 'todo'
+                                ? <> <button onClick={() => addItemtoSection(task.id, task.status, 'forward')}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l6-6m0 0l-6-6m6 6H9a6 6 0 000 12h3" />
+                                    </svg>
+                                </button></>
+                                : <></>
+                        }
+                        {
+                            task.status === 'inprogress'
+                                ? <span className="flex gap-2">
+                                    <button onClick={() => addItemtoSection(task.id, task.status, 'back')}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                                        </svg>
+                                    </button>
+                                    <button onClick={() => addItemtoSection(task.id, task.status, 'forward')}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l6-6m0 0l-6-6m6 6H9a6 6 0 000 12h3" />
+                                        </svg>
+                                    </button>
+                                </span>
+                                : <></>
+                        }
+                        {
+                            task.status === 'closed'
+                                ? <span className="flex gap-2">
+                                    <button onClick={() => addItemtoSection(task.id, task.status, 'back')}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                                        </svg>
+                                    </button>
+                                </span>
+                                : <></>
+                        }
+
+
+
+
                     </span>
                     : <></>
             }

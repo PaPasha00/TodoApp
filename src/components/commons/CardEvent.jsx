@@ -35,8 +35,8 @@ const CardEvent = ({ themeTwo, event, handleRemove }) => {
     }
 
     return (
-        <div className={`relative w-full flex justify-between p-4 mt-1 shadow-md ${themeTwo ? 'text-black' : 'text-white bg-slate-900'} rounded-md`}>
-            <span className="flex flex-col gap-1">
+        <div className={`relative w-full flex justify-between p-4 mt-1 shadow-md ${themeTwo ? 'text-black bg-slate-100' : 'text-white bg-slate-900'} rounded-md`}>
+            <span className="flex flex-col gap-1 font-medium">
                 <p>{event.name}</p>
                 <span className="flex gap-3 text-slate-400 font-medium">
                     <p >{`${normalizeDate(event.date)}`}</p>
@@ -46,7 +46,7 @@ const CardEvent = ({ themeTwo, event, handleRemove }) => {
 
             </span>
 
-            <button className="" onClick={() => handleRemove(event.id)}>
+            <button className="pl-3" onClick={() => handleRemove(event.id)}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>

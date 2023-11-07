@@ -12,7 +12,7 @@ function App() {
   const [themeTwo, setThemeTwo] = useState(
     JSON.parse(localStorage.getItem('theme'))
   );
-  const [needButtonsDrug, setNeedButtonsDrug] = useState(true);
+  const [needButtonsDrug, setNeedButtonsDrug] = useState(JSON.parse(localStorage.getItem("needButton")));
 
   const status = true;
 
@@ -21,7 +21,7 @@ function App() {
       setTasks(JSON.parse(localStorage.getItem("tasks")))
     }
     if (JSON.parse(localStorage.getItem("needButton")) !== null) {
-      setTasks(JSON.parse(localStorage.getItem("tasks")))
+      setNeedButtonsDrug(JSON.parse(localStorage.getItem("needButton")))
     }
   }, [])
 
