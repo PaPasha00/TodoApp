@@ -19,7 +19,7 @@ const Calendar = () => {
         id: "",
         name: "",
         date: "",
-        time: "",
+        time: "00:00",
         status: 'calend'
     });
     useEffect(() => {
@@ -37,11 +37,16 @@ const Calendar = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        console.log(event.time);
+
         if (event.name.length < 3)
             return toast.error('В мероприятии должно быть не менее трёх символов')
 
         if (event.date.length < 10)
             return toast.error('Введите дату')
+
+        if (event.time?.length < 5)
+            return toast.error('Введите время')
 
         if (event.name.length > 100)
             return toast.error('В мероприятии должно быть не более 100 символов')
@@ -139,45 +144,45 @@ const Calendar = () => {
         <>
             <Toaster />
             <section className={`w-full ${themeTwo ? 'bg-slate-200' : 'bg-slate-900'} flex pb-5 px-3 md:pl-10 gap-3 md:gap-10 pt-[50px] min-h-screen flex-col items-center`}>
-                <LinkButton text='К делам' path='/' needReverse='true' />
-                <form onSubmit={handleSubmit} className="flex gap-1 flex-col mt-2">
+                <div className="w-full flex justify-center">
+                    <div className="max-w-[350px] w-full flex justify-start">
+                        <LinkButton text='К делам' path='/' needReverse='true' />
+                        <form onSubmit={handleSubmit} className="flex gap-1 flex-col items-start mt-2">
+                            <span className="w-full flex justify-start gap-1">
+                                <input type="text"
+                                    className={`border-2 border-slate-500  rounded-md ${themeTwo ? 'bg-slate-100 text-black' : 'bg-slate-600 text-slate-100'} p-1 pl-3`}
+                                    value={event.name}
+                                    onChange={(e) => setEvent({ ...event, id: uuidv4(), name: e.target.value })}
+                                />
+                                <button className={`p-2 rounded-md ${themeTwo ? 'bg-slate-500 text-white' : 'bg-slate-600 text-slate-100'} text-white font-bold hover:bg-slate-400 duration-300`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </button>
+                            </span>
+                            <span className="w-full flex justify-center gap-3">
+                                <input type="date"
+                                    value={event.date}
+                                    onChange={(e) => setEvent({ ...event, id: uuidv4(), date: e.target.value })}
+                                    className={`border-2 border-slate-500  rounded-md ${themeTwo ? 'bg-slate-100 text-black' : 'bg-slate-600 text-slate-100'} p-1 pl-3`}
+                                />
+                                <input type="time"
+                                    value={event.time}
+                                    onChange={(e) => setEvent({ ...event, id: uuidv4(), time: e.target.value })}
+                                    className={`border-2 border-slate-500  rounded-md ${themeTwo ? 'bg-slate-100 text-black' : 'bg-slate-600 text-slate-100'} p-1 pl-3`}
+                                />
+                            </span>
+                        </form>
+                    </div>
+                </div>
 
-                    <span className="w-full flex justify-center gap-1">
-                        <input type="text"
-                            className={`border-2 border-slate-500  rounded-md ${themeTwo ? 'bg-slate-100 text-black' : 'bg-slate-600 text-slate-100'} p-1 pl-3`}
-                            value={event.name}
-                            onChange={(e) => setEvent({ ...event, id: uuidv4(), name: e.target.value })}
-                        />
-                        <button className={`p-2 rounded-md ${themeTwo ? 'bg-slate-500 text-white' : 'bg-slate-600 text-slate-100'} text-white font-bold hover:bg-slate-400 duration-300`}>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </button>
-                    </span>
-
-
-                    <span className="w-full flex justify-center gap-3">
-                        <input type="date"
-                            value={event.date}
-                            onChange={(e) => setEvent({ ...event, id: uuidv4(), date: e.target.value })}
-                            className={`border-2 border-slate-500  rounded-md ${themeTwo ? 'bg-slate-100 text-black' : 'bg-slate-600 text-slate-100'} p-1 pl-3`}
-                        />
-                        <input type="time"
-                            value={event.time}
-                            onChange={(e) => setEvent({ ...event, id: uuidv4(), time: e.target.value })}
-                            className={`border-2 border-slate-500  rounded-md ${themeTwo ? 'bg-slate-100 text-black' : 'bg-slate-600 text-slate-100'} p-1 pl-3`}
-                        />
-
-                    </span>
-
-                </form>
 
                 {
                     !calendySorted
                         ? <div className={`flex mt-10 flex-wrap justify-center gap-3 w-full ${themeTwo ? 'text-black' : 'text-white bg-slate-900'}`}>
                             {
                                 Object.keys(eventsSort).map((e, index) => {
-                                    return (<div className={`w-[300px] flex flex-col gap-0 p-2 rounded-md ${themeTwo ? "bg-slate-50" : "bg-slate-800"}`} key={index}>
+                                    return (<div className={`w-[300px] flex flex-col gap-0 p-2 rounded-[12px] ${themeTwo ? "bg-slate-50" : "bg-slate-800"}`} key={index}>
                                         <Header count={eventsSort[e].length} date={normalizeDate(String(e))} />
                                         <div className={`px-1 pb-2`}>
                                             {eventsSort[e].map((data, index) => {

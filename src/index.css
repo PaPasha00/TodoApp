@@ -16,3 +16,29 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 body {
     overflow-x: hidden;
 }
+
+html, p, span, div, h1, h2, h3, h4, a, button {
+    font-family: Pragmatica, 'sans-serif';
+}
+
+@font-face {
+    font-family: Pragmatica;
+    font-weight: 700;
+    src: url('/fonts/woff/PragmaticaExtraBold.woff') format("woff"),
+        url('/fonts/ttf/PragmaticaExtraBold.ttf') format("ttf"),
+        url('/fonts/otf/PragmaticaExtraBold.otf') format("otf");
+}
+@font-face {
+    font-family: Pragmatica;
+    font-weight: 500;
+    src: url('/fonts/woff/Pragmatica.woff') format("woff"),
+        url('/fonts/ttf/Pragmatica.ttf') format("ttf"),
+        url('/fonts/otf/Pragmatica.otf') format("otf");
+}
+@font-face {
+    font-family: Pragmatica;
+    font-weight: 300;
+    src: url('/fonts/woff/PragmaticaExtraLight.woff') format("woff"),
+        url('/fonts/ttf/PragmaticaExtraLight.ttf') format("ttf"),
+        url('/fonts/otf/PragmaticaExtraLight.otf') format("otf");
+}

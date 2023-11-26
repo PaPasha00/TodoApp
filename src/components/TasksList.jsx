@@ -86,7 +86,7 @@ const Section = ({ status, tasks, setTasks, todos, inProgress, closed, themeTwo,
     return (
         <div ref={drop} className={`${themeTwo
             ? `${isOver ? 'bg-slate-300' : 'bg-slate-50'}`
-            : `${isOver ? 'bg-slate-700' : 'bg-slate-800'}`} flex flex-col p-2 rounded-md`}
+            : `${isOver ? 'bg-slate-700' : 'bg-slate-800'}`} flex flex-col p-2 rounded-[12px]`}
         >
             <Header bg={bg} text={text} count={tasksToMap.length} />
             {
@@ -160,7 +160,7 @@ const Task = ({ task, tasks, setTasks, themeTwo, needButtonsDrug }) => {
     return (
         <div ref={drag} className={`relative flex flex-col justify-between max-w-[300px] p-4 mt-3 pb-2 shadow-md ${themeTwo ? 'text-black' : 'text-white bg-slate-900'} rounded-md cursor-grab `}>
             <span className="flex justify-between">
-                <p>{task.name}</p>
+                <p className="font-medium">{task.name}</p>
                 <button className="" onClick={() => handleRemove(task.id)}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -207,10 +207,6 @@ const Task = ({ task, tasks, setTasks, themeTwo, needButtonsDrug }) => {
                                 </span>
                                 : <></>
                         }
-
-
-
-
                     </span>
                     : <></>
             }

@@ -2,7 +2,7 @@ const SortedCardEvent = ({themeTwo, handleRemove, time, name, id}) => {
     return (
         <div className={`shadow-md flex mt-2 p-2 py-4 ${themeTwo ? 'text-black' : 'text-white bg-slate-900'} justify-between rounded-md`}>
             <span className="flex items-center">
-                <span className={`flex gap-3 ${themeTwo ? 'text-slate-800' : 'text-white bg-slate-900'} font-semibold`}>
+                <span className={`flex gap-3 ${themeTwo ? 'text-slate-800' : 'text-white bg-slate-900'} font-medium`}>
                     {name}
                 </span>
             </span>
