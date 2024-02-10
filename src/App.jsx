@@ -9,12 +9,11 @@ import ThemeChanger from './components/ThemeChanger';
 function App() {
   const [tasks, setTasks] = useState([])
   const [themeMenu, setThemeMenu] = useState(false)
+  const [fullScreen, setFullScreen] = useState(false)
   const [themeTwo, setThemeTwo] = useState(
     JSON.parse(localStorage.getItem('theme'))
   );
   const [needButtonsDrug, setNeedButtonsDrug] = useState(JSON.parse(localStorage.getItem("needButton")));
-
-  const status = true;
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("tasks")) !== null) {
@@ -31,6 +30,34 @@ function App() {
   useEffect(() => {
     localStorage.setItem("needButton", JSON.stringify(needButtonsDrug))
   }, [needButtonsDrug])
+
+  const fullScreenFunk = () => {
+    if (!fullScreen) {
+      function fullScreen(element) {
+        if(element.requestFullscreen) {
+          element.requestFullscreen();
+        } else if(element.webkitrequestFullscreen) {
+          element.webkitRequestFullscreen();
+        } else if(element.mozRequestFullscreen) {
+          element.mozRequestFullScreen();
+        }
+      }
+      const html = document.documentElement;
+      fullScreen(html);
+    } else {
+      function fullScreenCancel() {
+        if(document.requestFullscreen) {
+          document.requestFullscreen();
+        } else if(document.webkitRequestFullscreen ) {
+          document.webkitRequestFullscreen();
+        } else if(document.mozRequestFullscreen) {
+          document.mozRequestFullScreen();
+        }
+      }
+      fullScreenCancel();
+    }
+    setFullScreen(!fullScreen)
+  }
 
   return (
 
@@ -56,6 +83,7 @@ function App() {
           setTasks={setTasks}
           setThemeMenu={setThemeMenu}
           themeMenu={themeMenu}
+          fullScreenFunk={fullScreenFunk}
         />
 
         <ListTask

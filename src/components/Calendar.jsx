@@ -37,8 +37,6 @@ const Calendar = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(event.time);
-
         if (event.name.length < 3)
             return toast.error('В мероприятии должно быть не менее трёх символов')
 
