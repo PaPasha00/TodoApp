@@ -74,7 +74,7 @@ const CreateTask = ({ tasks, setTasks, themeTwo, setThemeTwo, setThemeMenu, them
                     </svg>
                 </button>
 
-                <button onClick={fullScreenFunk} className={`absolute top-3 p-1 md:p-3 rounded-md right-20 text-white ${themeTwo ? 'bg-slate-700' : 'bg-slate-500'}`}>
+                <button onClick={fullScreenFunk} className={`absolute top-3 p-1 md:p-3 rounded-md md:right-20 right-14 text-white ${themeTwo ? 'bg-slate-700' : 'bg-slate-500'}`}>
                     <img src="./../fullscreen.png" alt="" className="w-[24px] h-[24px]"/>
                 </button>
 
